@@ -2,7 +2,7 @@
 
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-05145aa983b96af38" # replace with your SG ID
-INSTANCES=("mongodb" "mysql" "catalogue" "frontend")
+INSTANCES=("frontend" "mongodb" "catalogue")
 ZONE_ID="Z0536203ZPIYPJY2Y2R6" # replace with your ZONE ID
 DOMAIN_NAME="rageti.site" # replace with your domain
 
