@@ -5,6 +5,17 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+Logsfolder="/var/logs/shellscripting-logs"
+sciptname=$(echo "$0" | cut -d "." -f1)
+logfile="$Logsfolder/$scriptname.log"
+script_dir=$PWD
+
+
+mkdir -p $Logsfolder
+
+echo " script started executing at : $(date) "
+
+
 
 if [ $USERID -ne 0 ]
 then
@@ -36,13 +47,37 @@ fi
 dnf module disable nginx -y
 validate $? "Nginx disable"
 
-
-
 dnf module enable nginx:1.24 -y
 validate $? "nginx enable"
 
-
 dnf install nginx -y
 validate $? "nginx installation"
+
+systemctl enable nginx
+validate $? "systemctl nginx server enable is"
+
+systemctl start nginx
+validate $? "systemctl nginx server start is"
+
+rm -rf /usr/share/nginx/html/* 
+validate $? "removing files inside html directory is "
+
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+validate $? "downloading frontend zip file"
+
+cd /usr/share/nginx/html
+unzip /tmp/frontend.zipunzip /tmp/frontend.zip
+validate $? "unzipped"
+
+cp $script_dir/nginx.conf /etc/nginx/nginx.conf
+validate $? "copy of nginx conf file is"
+
+systemctl restart nginx 
+validate $? "nginx restart is"
+
+
+
+
+
 
 
