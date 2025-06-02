@@ -6,7 +6,7 @@ Y="\e[33m"
 N="\e[0m"
 
 Logsfolder="/var/log/shellscripting-logs"
-sciptname=$(echo $0 | cut -d "." -f1)
+scriptname=$(echo $0 | cut -d "." -f1)
 logfile="$Logsfolder/$scriptname.log"
 script_dir=$PWD
 
