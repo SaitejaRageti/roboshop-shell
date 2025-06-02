@@ -30,19 +30,12 @@ validate(){
     then 
         echo -e "$2 .......$G success $N" | tee -a $logfile
     else
-        echo "$2  ......$R failed" | tee -a $logfile
+        echo "$2  ......$R failed $N" | tee -a $logfile
         exit 1
     fi
 }
 
-dnf list installed nginx &>>$logfile
-if [ $? -eq 0 ]
-then
-    echo " nginx already installed"
-    exit 1
-else
-    echo " start installing nginx"
-fi
+
 
 dnf module disable nginx -y &>>$logfile
 validate $? "Nginx disable"
@@ -66,7 +59,7 @@ curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v
 validate $? "downloading frontend zip file"
 
 cd /usr/share/nginx/html 
-unzip /tmp/frontend.zipunzip &>>$logfile
+unzip /tmp/frontend.zip &>>$logfile
 validate $? "unzipped"
 
 cp $script_dir/nginx.conf /etc/nginx/nginx.conf &>>$logfile
