@@ -52,7 +52,7 @@ else
     echo " user is already existing ; Skipping "
 fi 
 
-mkdir /app 
+mkdir -p /app 
 validate $? "creating the app directory"
 
 
