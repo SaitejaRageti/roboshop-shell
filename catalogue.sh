@@ -90,7 +90,7 @@ STATUS=$(mongosh --host mongodb.rageti.site --eval 'db.getMongo().getDBNames().i
 if [ $STATUS -lt 0 ]
 then
     mongosh --host mongodb.rageti.site </app/db/master-data.js 
-    VALIDATE $? "Loading data into MongoDB"
+    validate $? "Loading data into MongoDB"
 else
     echo -e "Data is already loaded ... $Y SKIPPING $N"
 fi
