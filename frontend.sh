@@ -14,33 +14,35 @@ else
     echo "You are running with root user go ahead"
 fi
 
-dnf module disable nginx -y
+validate(){
+    if [ $1 -eq 0 ]
+    then 
+        echo "$2 .......success"
+    else
+        echo "$2  ......failed"
+        exit 1
+    fi
+}
 
+dnf list installed nginx
 if [ $? -eq 0 ]
-then 
-    echo " disabled successfully"
-else
-    echo "disable failed"
+then
+    echo " nginx already installed"
     exit 1
+else
+    echo " start installing nginx"
 fi
+
+dnf module disable nginx -y
+validate $? "Nginx disable"
+
+
 
 dnf module enable nginx:1.24 -y
+validate $? "nginx enable"
 
-if [ $? -eq 0 ]
-then 
-    echo " enabled successfully"
-else
-    echo "enable failed"
-    exit 1
-fi
 
-dnf install nginx -y 
+dnf install nginx -y
+validate $? "nginx installation"
 
-if [ $? -eq 0 ]
-then 
-    echo " installed successfully"
-else
-    echo "installation failed"
-    exit 1
-fi
 
