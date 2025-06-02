@@ -43,7 +43,7 @@ dnf install nodejs -y &>>$logfile
 validate $? "nodejs installation is"
 
 id roboshop
-if [ $? -ne o ]
+if [ $? -ne 0 ]
 then
     echo " roboshop user is not created"
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
