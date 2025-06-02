@@ -63,6 +63,7 @@ cd /app
 unzip /tmp/catalogue.zip &>>$logfile
 validate $? "unzipping the catalogue zip file" 
 
+rm -rf /app/*
 cd /app 
 npm install 
 validate $? "npm installing dependencies"
