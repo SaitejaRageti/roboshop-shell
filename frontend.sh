@@ -19,23 +19,23 @@ echo " script started executing at : $(date) "
 
 if [ $USERID -ne 0 ]
 then
-    echo "you are running with Non root user. Run with root user"
+    echo -e "$R you are running with Non root user. Run with root user $N" | tee -a $logfile
     exit 1
 else
-    echo "You are running with root user go ahead"
+    echo -e "$G You are running with root user go ahead $N" | tee -a $logfile
 fi
 
 validate(){
     if [ $1 -eq 0 ]
     then 
-        echo "$2 .......success"
+        echo -e "$2 .......$G success $N" | tee -a $logfile
     else
-        echo "$2  ......failed"
+        echo "$2  ......$R failed" | tee -a $logfile
         exit 1
     fi
 }
 
-dnf list installed nginx
+dnf list installed nginx &>>$logfile
 if [ $? -eq 0 ]
 then
     echo " nginx already installed"
@@ -44,35 +44,35 @@ else
     echo " start installing nginx"
 fi
 
-dnf module disable nginx -y
+dnf module disable nginx -y &>>$logfile
 validate $? "Nginx disable"
 
-dnf module enable nginx:1.24 -y
+dnf module enable nginx:1.24 -y &>>$logfile
 validate $? "nginx enable"
 
-dnf install nginx -y
+dnf install nginx -y &>>$logfile
 validate $? "nginx installation"
 
-systemctl enable nginx
+systemctl enable nginx &>>$logfile
 validate $? "systemctl nginx server enable is"
 
-systemctl start nginx
+systemctl start nginx &>>$logfile
 validate $? "systemctl nginx server start is"
 
-rm -rf /usr/share/nginx/html/* 
+rm -rf /usr/share/nginx/html/* &>>$logfile
 validate $? "removing files inside html directory is "
 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$logfile
 validate $? "downloading frontend zip file"
 
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zipunzip /tmp/frontend.zip
+cd /usr/share/nginx/html 
+unzip /tmp/frontend.zipunzip /tmp/frontend.zip &>>$logfile
 validate $? "unzipped"
 
-cp $script_dir/nginx.conf /etc/nginx/nginx.conf
+cp $script_dir/nginx.conf /etc/nginx/nginx.conf &>>$logfile
 validate $? "copy of nginx conf file is"
 
-systemctl restart nginx 
+systemctl restart nginx &>>$logfile
 validate $? "nginx restart is"
 
 
