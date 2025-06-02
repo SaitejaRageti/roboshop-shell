@@ -5,7 +5,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-Logsfolder="/var/logs/shellscripting-logs"
+Logsfolder="/var/log/shellscripting-logs"
 sciptname=$(echo "$0" | cut -d "." -f1)
 logfile="$Logsfolder/$scriptname.log"
 script_dir=$PWD
@@ -34,7 +34,6 @@ validate(){
         exit 1
     fi
 }
-
 
 
 dnf module disable nginx -y &>>$logfile
