@@ -6,7 +6,7 @@ Y="\e[33m"
 N="\e[0m"
 
 
-if [$USERID -ne 0]
+if [ $USERID -ne 0 ]
 then
     echo "you are not running with root user"
 else
