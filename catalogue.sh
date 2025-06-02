@@ -68,7 +68,7 @@ cd /app
 npm install 
 validate $? "npm installing dependencies"
 
-cp $script_dir/catalogue.service etc/systemd/system/ 
+cp $script_dir/catalogue.service /etc/systemd/system/ 
 validate $? "creating the catalogue service file"
 
 systemctl daemon-reload &>>$logfile
