@@ -46,7 +46,7 @@ id roboshop
 if [ $? -ne 0 ]
 then
     echo " roboshop user is not created"
-    cartadd --system --home /app --shell /sbin/nologin --comment "roboshop system cart" roboshop
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system cart" roboshop
     validate $? "creating the roboshop user"
 else
     echo " user is already existing ; Skipping "
