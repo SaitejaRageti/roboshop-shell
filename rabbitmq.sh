@@ -50,4 +50,5 @@ validate $? "starting rabbit server"
 
 rabbitmqctl add_user roboshop $RABBITMQ_PASSWD
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+validate $? "permissions set"
 
