@@ -35,10 +35,12 @@ validate(){
 
 dnf module disable redis -y
 validate $? "redis module disable is "
+
 dnf module enable redis:7 -y
 validate $? "redis module enable is "
+
 dnf install redis -y 
-$? "redis installation is "
+validate $? "redis installation is "
 
 sed -i -e 's/127.0.0.1/0.0.0.0/g' -e 's/protected-mode yes/protected-mode no' /etc/redis/redis.conf &&
 validate $? "making changes in redisconf to accept the remote connections"
