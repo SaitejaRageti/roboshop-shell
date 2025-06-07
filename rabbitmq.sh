@@ -39,6 +39,9 @@ read -s RABBITMQ_PASSWD
 cp $script_dir/rabbitmq.repo /etc/yum.repos.d/ &>>$logfile
 validate $? "rabbitmq repo file creating"
 
+dnf install rabbitmq-server -y
+validate $? "installing rabbitmq"
+
 systemctl enable rabbitmq-server
 validate $? "enabling rabbitmq"
 
