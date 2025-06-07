@@ -68,7 +68,7 @@ cd /app
 npm install 
 validate $? "npm installing dependencies"
 
-cp $script_dir/user.service /etc/systemd/system/ 
+cp $script_dir/user.service /etc/systemd/system/user.service 
 validate $? "creating the user service file"
 
 systemctl daemon-reload &>>$logfile
