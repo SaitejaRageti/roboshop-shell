@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cartID=$(id -u)
+USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
@@ -17,10 +17,10 @@ echo " script started executing at : $(date) "
 
 if [ $USERID -ne 0 ]
 then
-    echo -e "$R you are running with Non root user. Run with root cart $N" | tee -a $logfile
+    echo -e "$R you are running with Non root user. Run with root USER $N" | tee -a $logfile
     exit 1
 else
-    echo -e "$G You are running with root cart go ahead $N" | tee -a $logfile
+    echo -e "$G You are running with root user go ahead $N" | tee -a $logfile
 fi
 
 validate(){
@@ -45,11 +45,11 @@ validate $? "nodejs installation is"
 id roboshop
 if [ $? -ne 0 ]
 then
-    echo " roboshop cart is not created"
+    echo " roboshop user is not created"
     cartadd --system --home /app --shell /sbin/nologin --comment "roboshop system cart" roboshop
-    validate $? "creating the roboshop cart"
+    validate $? "creating the roboshop user"
 else
-    echo " cart is already existing ; Skipping "
+    echo " user is already existing ; Skipping "
 fi 
 
 mkdir -p /app 
