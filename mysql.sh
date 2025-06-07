@@ -49,4 +49,4 @@ END_TIME=$(date +%s)
 
 timeTakenforexecution=$(($END_TIME - $START_TIME))
 
-echo -e " $G Total time taken for executing this script is $timeTakenForexecution $N "
+echo -e " $G Total time taken for executing this script is $timeTakenforexecution $N "
